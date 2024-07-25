@@ -18,12 +18,12 @@ def setup_logging(log_file):
     if not os.path.exists(log_file_dir):
         try:
             os.makedirs(log_file_dir, exist_ok=True)
-            print(f"Log directory created: {log_file_dir}")  # Debug print
+            print(f"Log directory created: {log_file_dir}")
         except PermissionError:
-            print(f"Permission denied: Cannot create directory {log_file_dir}")  # Debug print
+            print(f"Permission denied: Cannot create directory {log_file_dir}")
             raise
         except Exception as e:
-            print(f"Error creating directory {log_file_dir}: {e}")  # Debug print
+            print(f"Error creating directory {log_file_dir}: {e}")
             raise
 
     try:
