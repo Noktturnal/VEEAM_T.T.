@@ -5,6 +5,7 @@ import os
 import shutil
 import logging
 
+
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Synchronize a source with replica.')
     parser.add_argument("source", type=str, help="Path to the source directory.")
@@ -12,6 +13,7 @@ def parse_arguments():
     parser.add_argument("interval", type=int, help="Interval between synchronization in seconds.")
     parser.add_argument("log_file", type=str, help="Path to the log file.")
     return parser.parse_args()
+
 
 def setup_logging(log_file):
     log_file_dir = os.path.dirname(log_file)
@@ -35,6 +37,7 @@ def setup_logging(log_file):
         print(f"Error initializing logging: {e}")
         raise
 
+
 def compute_md5(file_path):
     hash_md5 = hashlib.md5()
     try:
@@ -46,6 +49,7 @@ def compute_md5(file_path):
     except Exception as e:
         logging.error(f"Error computing MD5 for {file_path}: {e}")
     return hash_md5.hexdigest()
+
 
 def sync_folders(source, replica):
     if not os.path.exists(replica):
@@ -106,6 +110,7 @@ def sync_folders(source, replica):
                 except Exception as e:
                     logging.error(f"Error removing directory {replica_dir}: {e}")
 
+
 def main():
     args = parse_arguments()
     setup_logging(args.log_file)
@@ -120,6 +125,7 @@ def main():
         sync_folders(source, replica)
         logging.info("Synchronization complete. Waiting for next interval...")
         time.sleep(interval)
+
 
 if __name__ == '__main__':
     main()
